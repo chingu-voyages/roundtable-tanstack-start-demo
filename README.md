@@ -1,5 +1,9 @@
 Welcome to your new TanStack app! 
 
+# Deployment
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a707a75d-86d4-46a4-a87b-05a83c9aa860/deploy-status)](https://app.netlify.com/sites/chingu-rountable-tanstack-start-demo/deploys)
+
 # Getting Started
 
 To run this application:
