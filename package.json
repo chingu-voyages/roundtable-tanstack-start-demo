@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "start": "vinxi start",
-    "build": "prisma migrate deploy && vinxi build",
+    "build": "vinxi build",
     "serve": "vite preview",
     "test": "vitest run",
-    "dev": "vinxi dev"
+    "dev": "vinxi dev",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@faker-js/faker": "^9.6.0",
