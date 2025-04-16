@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as PostsIndexImport } from './routes/posts/index'
+import { Route as PostsIdImport } from './routes/posts/$id'
 import { Route as DemoStartServerFuncsImport } from './routes/demo/start.server-funcs'
 import { Route as DemoStartApiRequestImport } from './routes/demo/start.api-request'
 import { Route as DemoFormSimpleImport } from './routes/demo/form.simple'
@@ -29,6 +30,12 @@ const IndexRoute = IndexImport.update({
 const PostsIndexRoute = PostsIndexImport.update({
   id: '/posts/',
   path: '/posts/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PostsIdRoute = PostsIdImport.update({
+  id: '/posts/$id',
+  path: '/posts/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -65,6 +72,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/posts/$id': {
+      id: '/posts/$id'
+      path: '/posts/$id'
+      fullPath: '/posts/$id'
+      preLoaderRoute: typeof PostsIdImport
       parentRoute: typeof rootRoute
     }
     '/posts/': {
@@ -109,6 +123,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/posts/$id': typeof PostsIdRoute
   '/posts': typeof PostsIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -118,6 +133,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/posts/$id': typeof PostsIdRoute
   '/posts': typeof PostsIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -128,6 +144,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/posts/$id': typeof PostsIdRoute
   '/posts/': typeof PostsIndexRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
@@ -139,6 +156,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/posts/$id'
     | '/posts'
     | '/demo/form/address'
     | '/demo/form/simple'
@@ -147,6 +165,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/posts/$id'
     | '/posts'
     | '/demo/form/address'
     | '/demo/form/simple'
@@ -155,6 +174,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/posts/$id'
     | '/posts/'
     | '/demo/form/address'
     | '/demo/form/simple'
@@ -165,6 +185,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PostsIdRoute: typeof PostsIdRoute
   PostsIndexRoute: typeof PostsIndexRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
@@ -174,6 +195,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PostsIdRoute: PostsIdRoute,
   PostsIndexRoute: PostsIndexRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
@@ -192,6 +214,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/posts/$id",
         "/posts/",
         "/demo/form/address",
         "/demo/form/simple",
@@ -201,6 +224,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/posts/$id": {
+      "filePath": "posts/$id.tsx"
     },
     "/posts/": {
       "filePath": "posts/index.tsx"

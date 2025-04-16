@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 
 export const Route = createFileRoute("/posts/")({
@@ -12,8 +12,8 @@ export const Route = createFileRoute("/posts/")({
 
 const getPosts = createServerFn({ method: "GET" }).handler(async () => {
   return [
-    { id: "1", title: "Hello" },
-    { id: "2", title: "World" },
+    { id: 1, title: "Hello" },
+    { id: 2, title: "World" },
   ];
 });
 
@@ -21,5 +21,17 @@ function RouteComponent() {
   const { posts } = Route.useLoaderData();
   console.log({ posts });
 
-  return <div>Hello "/posts/"!</div>;
+  return (
+    <>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>
+            <Link to="/posts/$id" params={{ id: post.id }}>
+              {post.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
