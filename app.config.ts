@@ -15,6 +15,9 @@ const config = defineConfig({
       tailwindcss(),
     ],
   },
+  server: {
+    preset: 'netlify'
+  }
 })
 
 export default config
