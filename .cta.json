@@ -1,0 +1,17 @@
+{
+  "framework": "react",
+  "typescript": true,
+  "projectName": "chingu-roundtable-tanstacstart-demo",
+  "mode": "file-router",
+  "tailwind": true,
+  "packageManager": "pnpm",
+  "toolchain": "none",
+  "variableValues": {},
+  "git": true,
+  "version": 1,
+  "existingAddOns": [
+    "form",
+    "shadcn",
+    "start"
+  ]
+}
